@@ -1,6 +1,14 @@
+ol, ul {
+  padding: 0;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
+
 
 .App-logo {
   height: 40vmin;
@@ -35,4 +43,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.primary-btn {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-image: linear-gradient( 100.48deg, #46d2ff 2.52%, #ff91c8 124.46% );
+  border: none;
+  color: white;
+  padding: .5rem 1rem;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 5px;
+}
+
+.primary-btn:hover {
+  transition: all 200ms ease-in-out;
+  transform: scale(1.05);
+  
+
 }

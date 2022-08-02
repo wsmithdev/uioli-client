@@ -1,0 +1,94 @@
+ul {
+  padding: 0px
+}
+
+.card-header-section {
+
+
+  display: flex;
+align-items: center;
+justify-content: center;
+gap: 5px;
+
+}
+
+.card-name-type {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+.btn-notifications {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .5rem;
+  border: none;
+  background-color: rgba(150, 170, 225, 0.7);
+  font-size: 1.1rem;
+  border-radius: 50%; 
+  margin-bottom: 10px;
+  color: white;
+}
+
+.notifications-on {
+  background-color: rgba(150, 170, 225, 1);
+
+}
+
+.btn-trash {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .5rem;
+  border: none;
+  background-color: rgb(233, 72, 59);
+  font-size: 1.1rem;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.card-popover-header {
+  background-color: #46d2ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-popover-title {
+font-size: 1.2rem;
+}
+
+.card-popover-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-popover-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+
+
+.card-popover-btn{
+
+  font-size: 1rem;
+  border: 1px solid #46d2ff;
+  color: #46d2ff;
+  background-color: transparent;
+  padding: .3rem 1rem;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 5px;
+}
+
+.card-popover-btn:hover {
+  background-color: red;
+  border: 1px solid black;
+  color: black;
+}

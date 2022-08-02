@@ -1,0 +1,13 @@
+.job-card-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.job-card-btn {
+  border: 1px solid white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  color: white;
+}
+

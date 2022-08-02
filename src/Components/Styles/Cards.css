@@ -1,0 +1,25 @@
+ul {
+    padding: 0;
+}
+
+.cards-main {
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.cards-title {
+    padding: 3rem 0;
+    font-weight: 600;
+    font-size: 3.2rem;
+    background-image: linear-gradient( 100.48deg, #46d2ff 2.52%, #ff91c8 124.46% );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
