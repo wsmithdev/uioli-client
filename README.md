@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+# [Use It Or Lose It](https://use-it-or-lose-it.surge.sh/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Use It Or Lose It or UIOLI, is a web application created to solve a very specific problem that I encountered while dealing with the good ol' credit score system that we all love some much. To build any sort of credit, most people rely on credit cards. They are relatively easy to get, and some give you awesome rewards. From cash back, signup bonuses to travel points, but I digress. 
 
-## Available Scripts
+Since "Length of Credit History", according to [Nerdwallet](https://www.nerdwallet.com/article/finance/fico-score), makes up 15% of your credit score, it's a pretty big deal if you close one of the credit card accounts. Even worse if this happens unbeknownst to you due to you forgetting to use one of your now 100 credit cards that you've accumulated over the years to get that sweet 750 on your credit score report. 
 
-In the project directory, you can run:
+That is where Use It Or Lose It comes to the rescue! Simply signup using your email address, link your bank accounts using the [Plaid](https://plaid.com/) service and select the card usage frequency (most banks require a transaction at least once every 6-months). UIOLI will monitor your account activity and send you an email if you need to use your card, and you won't have to worry about losing your account or any reward points, so go ahead and book that trip to the Caribbean!
 
-### `npm start`
+## Technical Information
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Front-End technologies used:
+- ReactJS
+- React Bootstrap
+- JavaScript
+- CSS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Back-End technologies used: 
+- NodeJS
+- ExpressJS
+- PostgreSQL
+- bcryptJS
+- JSON Web Tokens
 
-### `npm test`
+### API used:
+- Plaid API to link bank account to the web application
+- Twilio/SendGrid to send email reminders
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#
