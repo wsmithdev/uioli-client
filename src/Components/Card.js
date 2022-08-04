@@ -1,47 +1,27 @@
-import {
-  Card,
-  Dropdown,
-  Button,
-  Col,
-  Row,
-  ListGroup,
-  Popover,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
-import { Link } from "react-router-dom";
-import "./Styles/Card.css";
-import { useEffect, useState } from "react";
-
-import Api from "../api";
+// Modules
+import { useState } from "react";
 import useLocalStorage from "../Hooks/useLocalStorage";
+import { confirmAlert } from "react-confirm-alert";
+
+// Components
+import { Card, Dropdown } from "react-bootstrap";
+import toast from "../toasts";
+import Api from "../api";
+
+// Styles
+import "./Styles/Card.css";
+import { FaTrash } from "react-icons/fa";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 
-import { FaBell, FaBellSlash, FaTrash } from "react-icons/fa";
 
-const CreditCard = ({ card, removeCard }) => {
-  console.log(card)
+const CreditCard = ({ card, removeCard, updateFreq }) => {
   const [user, setUser] = useLocalStorage("user", {});
-  const [freq, setFreq] = useState(null);
-  const [nextUse, setNextUse] = useState(null);
   const [notifications, setNotifications] = useState(card.notifications);
 
-
-
-  useEffect(() => {
-    if (card.days) setFreq(card.days);
-    if (card.next_use) setNextUse(card.next_use);
-  }, []);
-
   // Update usage frequency handler
-  const handleUpdateFreq = async (days) => {
-    try {
-      const res = await Api.updateFreq(user, days, card.id);
-      setFreq(() => res.freq);
-      setNextUse(() => res.nextUse);
-    } catch (err) {
-      console.log(err);
-    }
+  const handleUpdateFreq = (days) => {
+    updateFreq(days, card.id);
   };
 
   // Toggle notifications handler
@@ -50,6 +30,8 @@ const CreditCard = ({ card, removeCard }) => {
       const res = await Api.toggleNotifications(user, card.id);
       if (res.notifications === true || res.notifications === false) {
         setNotifications((n) => !n);
+        if (res.notifications === true) toast(`Reminders on`, "success");
+        if (res.notifications === false) toast(`Reminders off`, "success");
       }
     } catch (err) {
       console.log(err);
@@ -57,53 +39,90 @@ const CreditCard = ({ card, removeCard }) => {
   };
 
   // Remove card handler
-  const handleRemoveCard = (data) => {
-    removeCard(card.id);
+  const handleRemoveCard = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui">
+            <h1>Remove Card</h1>
+            <p>Are you sure that you want to remove this credit card?</p>
+
+            <button
+              onClick={() => {
+                removeCard(card.id);
+                onClose();
+              }}
+            >
+              Yes
+            </button>
+            <button onClick={onClose}>No</button>
+          </div>
+        );
+      },
+    });
   };
 
   // Days remaining
-  let days_remaining = Math.round(card.next_use)
- 
+  let days_remaining = Math.round(card.next_use);
+  const useWithin = `Use this card within: ${days_remaining} days`;
+  const overdue = `Overdue`;
 
   return (
-    <Card>
+    <Card className="card-main">
+  
+      <Card.Body style={{ padding: "0" }} className="card-top-section">
+        <button onClick={handleRemoveCard} className="btn-trash">
+          <FaTrash />
+        </button>
+      </Card.Body>
+     
+      <Card.Img variant="top" src={require("../Assets/cc.png")} />
+ 
       <Card.Body>
-        <div className="card-header-section">
-          <span className="card-name-type">
-            {card.bank_name} {card.card_name}
-          </span>
-
+        <Card.Title>
+          {card.bank_name} {card.card_name}
+        </Card.Title>
+        <Card.Subtitle style={{ marginTop: "10px" }}>
+          {days_remaining > 0 ? (
+            <span>{useWithin}</span>
+          ) : (
+            <span className="days-overdue">{overdue}</span>
+          )}
+        </Card.Subtitle>
+        <hr />
+        
+        <Card.Text>
           <Dropdown onSelect={(days) => handleUpdateFreq(days)}>
-            <span>Usage frequency:</span>
-            <Dropdown.Toggle id="dropdown-autoclose-true" variant="" size="sm">
-              {freq ? freq : "Select frequency"}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item eventKey={7}>7 days</Dropdown.Item>
-              <Dropdown.Item eventKey={14}>14 days</Dropdown.Item>
-              <Dropdown.Item eventKey={21}>21 days</Dropdown.Item>
-              <Dropdown.Item eventKey={30}>30 days</Dropdown.Item>
-              <Dropdown.Item eventKey={90}>90 days</Dropdown.Item>
-              <Dropdown.Item eventKey={180}>180 days</Dropdown.Item>
-              <Dropdown.Item eventKey={365}>365 days</Dropdown.Item>
-            </Dropdown.Menu>
+            <span>
+              Usage frequency:
+              <Dropdown.Toggle
+                style={{ fontSize: "1.05rem" }}
+                id="dropdown-autoclose-true"
+                variant=""
+                size="sm"
+              >
+                {card.days ? card.days : "Select"}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item eventKey={7}>7 days</Dropdown.Item>
+                <Dropdown.Item eventKey={14}>14 days</Dropdown.Item>
+                <Dropdown.Item eventKey={21}>21 days</Dropdown.Item>
+                <Dropdown.Item eventKey={30}>30 days</Dropdown.Item>
+                <Dropdown.Item eventKey={90}>90 days</Dropdown.Item>
+                <Dropdown.Item eventKey={180}>180 days</Dropdown.Item>
+                <Dropdown.Item eventKey={365}>365 days</Dropdown.Item>
+              </Dropdown.Menu>
+            </span>
+            <button
+              className={`btn-notifications ${
+                notifications ? "" : "notifications-off"
+              }`}
+              onClick={handleToggleNotifications}
+            >
+              {notifications ? `Reminders On` : `Reminders Off`}
+            </button>
           </Dropdown>
-          <div style={{ flexGrow: 1 }}></div>
-          <button
-            onClick={handleToggleNotifications}
-            className={`btn-notifications ${
-              notifications ? "notifications-on" : ""
-            }`}
-          >
-            {notifications ? <FaBell /> : <FaBellSlash />}
-          </button>
-          <button onClick={handleRemoveCard} className="btn-trash">
-            <FaTrash />
-          </button>
-        </div>
-      
-    
-        <Card.Title>Days Remaining: {days_remaining > 0 ? days_remaining : "Overdue"}</Card.Title>
+        </Card.Text>
       </Card.Body>
     </Card>
   );

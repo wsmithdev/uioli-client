@@ -1,22 +1,23 @@
 // Modules
 import { useState } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
-import { useNavigate } from 'react-router-dom'
+import { Modal, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ submit }) => {
-  const navigate = useNavigate()
-
-
-  const handleClose = () => {
-    navigate("/")
-  };
+  const navigate = useNavigate();
 
   const INIT_STATE = {
-    email: "peter.m@gmail.com",
-    password: "password"
+    email: "john.doe@domain.com",
+    password: "password",
   };
   const [formData, setFormData] = useState(INIT_STATE);
 
+  // Close modal
+  const handleClose = () => {
+    navigate("/");
+  };
+
+  // Handle input changes
   const handleChange = (evt) => {
     const { name, value } = evt.target;
     setFormData((fData) => ({
@@ -25,16 +26,18 @@ const Login = ({ submit }) => {
     }));
   };
 
+  // Handle form submit
   const handleSubmit = () => {
-    submit(formData)
-    setFormData(INIT_STATE)
-    handleClose()
-  }
+    submit(formData);
+    setFormData(INIT_STATE);
+    handleClose();
+  };
 
+  // Styles
   const inputStyle = {
-    marginTop: '1rem',
-    display: 'flex'
-  }
+    marginTop: "1rem",
+    display: "flex",
+  };
 
   return (
     <div className="login-main">
@@ -44,7 +47,6 @@ const Login = ({ submit }) => {
         centered
         show={true}
         onHide={handleClose}
-        bg="dark"
       >
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
@@ -78,8 +80,27 @@ const Login = ({ submit }) => {
             justifyContent: "center",
           }}
         >
-          <Button style={{padding: ".5rem 3rem"}} onClick={handleSubmit} variant="success">Login</Button>
+          <button type="submit" className="primary-btn" onClick={handleSubmit}>
+            Login
+          </button>
         </Modal.Footer>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            textAlign: "center",
+          }}
+        >
+          <p>
+            Demo Account
+            <br />
+            Email: john.doe@domain.com
+            <br />
+            Password: password
+          </p>
+        </div>
       </Modal>
     </div>
   );

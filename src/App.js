@@ -1,6 +1,7 @@
 // Modules
 import { Routes, Route } from "react-router-dom";
 import useLocalStorage from "./Hooks/useLocalStorage";
+import PlaidApi from "./plaidApi";
 // Styles
 import "./App.css";
 // Components
@@ -8,7 +9,6 @@ import Api from "./api";
 import Navbar from "./Components/Nav";
 import Home from "./Components/Home";
 import Cards from "./Components/Cards";
-
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Profile from "./Components/Profile";
@@ -17,8 +17,6 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import toast from "./toasts";
 import UserContext from "./UserContext";
 
-import PlaidApi from "./plaidApi";
-
 const App = () => {
   const [user, setUser] = useLocalStorage("user", {});
 
@@ -26,10 +24,9 @@ const App = () => {
 
   // Handle user signup
   const handleSignup = async (user) => {
-
     try {
       const res = await Api.signup(user);
-      
+
       if (res.token) {
         setUser({ token: res.token, ...res.user });
         toast(`Welcome, ${res.user.first_name}`, "success");
@@ -63,9 +60,10 @@ const App = () => {
 
   // Handle user profile update
   const handleUpdate = async (data) => {
+    console.log(data);
     try {
       const token = user.token;
-      const id = user.id
+      const id = user.id;
       const res = await Api.updateUser(data, token, id);
 
       if (res.first_name) {
@@ -79,19 +77,16 @@ const App = () => {
     }
   };
 
-  
+  // Send plaid public token to the server
   const handleSendPublicToken = async (token) => {
-    const res = await PlaidApi.sendPublicToken(token, user)
-   
-    
-  }
+    await PlaidApi.sendPublicToken(token, user);
+  };
 
+  // Get user cards
   const handleGetCards = async () => {
-    const res = await Api.getUserCards(user)
-    return res
-  }
-
-  
+    const res = await Api.getUserCards(user);
+    return res;
+  };
 
   return (
     <div className="App">
@@ -103,7 +98,10 @@ const App = () => {
             path="/cards"
             element={
               <ProtectedRoute>
-                <Cards getCards={handleGetCards} sendPublicToken={handleSendPublicToken} />
+                <Cards
+                  getCards={handleGetCards}
+                  sendPublicToken={handleSendPublicToken}
+                />
               </ProtectedRoute>
             }
           />

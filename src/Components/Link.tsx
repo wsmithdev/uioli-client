@@ -67,7 +67,7 @@ const PlaidLinkWithOAuth = ({sendPublicToken}) => {
   return isOAuthRedirect ? (
     <></>
   ) : (
-    <button className="primary-btn" onClick={() => open()} disabled={!ready}>
+    <button style={{marginBottom: "1.5rem"}} className="primary-btn" onClick={() => open()} disabled={!ready}>
       Connect a bank account
     </button>
   );

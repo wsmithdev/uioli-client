@@ -2,8 +2,8 @@ import Toastify from 'toastify-js'
 
 const toast = (text, type = 'success') => {
     let color;
-    if (type === 'success') color = 'green'
-    else if (type === 'error') color = 'red'
+    if (type === 'success') color = 'rgb(124, 216, 113)'
+    else if (type === 'error') color = 'rgb(233, 72, 59)'
     else color = 'darkgray'
     return (
         Toastify({

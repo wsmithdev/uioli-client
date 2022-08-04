@@ -1,7 +1,10 @@
-import "./Styles/Nav.css";
+// Modules
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { BsFillPersonFill } from "react-icons/bs";
+
+// Styles
+import "./Styles/Nav.css";
+
 // Context
 import UserContext from "../UserContext";
 import { useContext } from "react";
@@ -16,7 +19,6 @@ const NavBar = ({ logout }) => {
             <img
               alt=""
               src={require("../Assets/nav-logo-blue.png")}
-           
               height="70"
             />
           </Navbar.Brand>

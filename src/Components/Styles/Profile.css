@@ -1,6 +1,26 @@
 .profile-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 2rem;
+  height: 100%;
+  background-image: url("../../Assets/bg-blue.png");
+  background-size: cover;
+}
+
+.profile-main form {
+  min-width: 30vw;
+  width: 25rem;
+}
+
+.form-label {
+  display: flex;
+  font-size: 1.1rem;
+}
+
+.form-title {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.4rem;
+  font-weight: bold;
 }

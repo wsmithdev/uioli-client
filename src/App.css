@@ -46,7 +46,6 @@ ol, ul {
 }
 
 .primary-btn {
-  margin-top: 2rem;
   font-size: 1.2rem;
   font-weight: bold;
   background-image: linear-gradient( 100.48deg, #46d2ff 2.52%, #ff91c8 124.46% );
@@ -60,6 +59,4 @@ ol, ul {
 .primary-btn:hover {
   transition: all 200ms ease-in-out;
   transform: scale(1.05);
-  
-
 }

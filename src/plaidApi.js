@@ -1,13 +1,12 @@
 import axios from "axios";
-
-const SBASE_URL = process.env.SERVER_APP_BASE_URL || "http://localhost:3001";
+const SBASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
 
 export default class PlaidApi {
   static token = "";
 
   // Request method
   static async request(endpoint, data = {}, method = "get") {
-    console.debug("API Call:", endpoint, data, method, this.token);
+    // console.debug("API Call:", endpoint, data, method, this.token);
     const url = `${SBASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${this.token}` };
     const params = method === "get" ? data : {};
@@ -23,24 +22,25 @@ export default class PlaidApi {
 
   /* Request link token */
   static async getLinkToken() {
-    let res = await this.request(`plaid/api/create_link_token`, {}, 'post');
+    let res = await this.request(`plaid/api/create_link_token`, {}, "post");
     return res.link_token;
   }
 
   /* Request access token */
   static async sendPublicToken(publicToken, user) {
-    this.token = user.token
-    let res = await this.request(`plaid/api/swap_public_token`, { publicToken }, 'post');
+    this.token = user.token;
+    let res = await this.request(
+      `plaid/api/swap_public_token`,
+      { publicToken },
+      "post"
+    );
     return res;
   }
 
   /* Add cards */
   static async addCard(user) {
-    this.token = user.token
-    let res = await this.request(`plaid/api/get_accounts`)
-    return res
+    this.token = user.token;
+    let res = await this.request(`plaid/api/get_accounts`);
+    return res;
   }
-  
-
-
 }

@@ -1,23 +1,25 @@
 // Modules
 import { useState } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
-import { useNavigate } from 'react-router-dom'
+import { Modal, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Signup = ({ submit }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
+  // Close modal
   const handleClose = () => {
-    navigate("/")
+    navigate("/");
   };
 
   const INIT_STATE = {
-    first_name: "Peter",
-    last_name: "Manning",
-    email: "peter.m@gmail.com",
+    first_name: "John",
+    last_name: "Doe",
+    email: "john.doe@domain.com",
     password: "password",
   };
   const [formData, setFormData] = useState(INIT_STATE);
 
+  // Handle input changes
   const handleChange = (evt) => {
     const { name, value } = evt.target;
     setFormData((fData) => ({
@@ -26,16 +28,18 @@ const Signup = ({ submit }) => {
     }));
   };
 
+  // Handle form submit
   const handleSubmit = () => {
-    submit(formData)
-    setFormData(INIT_STATE)
-    handleClose()
-  }
+    submit(formData);
+    setFormData(INIT_STATE);
+    handleClose();
+  };
 
+  // Styles
   const inputStyle = {
-    marginTop: '1rem',
-    display: 'flex'
-  }
+    marginTop: "1rem",
+    display: "flex",
+  };
 
   return (
     <div className="signup-main">
@@ -93,7 +97,9 @@ const Signup = ({ submit }) => {
             justifyContent: "center",
           }}
         >
-          <Button style={{padding: ".5rem 3rem"}} onClick={handleSubmit} variant="success">Signup</Button>
+          <button type="submit" className="primary-btn" onClick={handleSubmit}>
+            Signup
+          </button>
         </Modal.Footer>
       </Modal>
     </div>

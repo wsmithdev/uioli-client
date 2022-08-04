@@ -1,94 +1,82 @@
-ul {
-  padding: 0px
-}
-
-.card-header-section {
-
-
-  display: flex;
-align-items: center;
-justify-content: center;
-gap: 5px;
-
-}
-
-.card-name-type {
-  margin-top: 2rem;
-  font-size: 1.1rem;
+ul,
+ol {
+  padding: 0px;
 }
 
 .btn-notifications {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: .5rem;
+  margin-top: 5px;
+  font-weight: bold;
+  background-color: #46d2ff;
   border: none;
-  background-color: rgba(150, 170, 225, 0.7);
-  font-size: 1.1rem;
-  border-radius: 50%; 
-  margin-bottom: 10px;
   color: white;
+  padding: 0.5rem 1rem;
+  font-family: "Open Sans", sans-serif;
+  border-radius: 5px;
 }
 
-.notifications-on {
-  background-color: rgba(150, 170, 225, 1);
-
+.notifications-off {
+  background-color: rgb(133, 141, 149);
 }
 
 .btn-trash {
-
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: .5rem;
+  padding: 0.5rem;
   border: none;
   background-color: rgb(233, 72, 59);
   font-size: 1.1rem;
   border-radius: 50%;
-  margin-bottom: 10px;
+  margin: 0.8rem 0.8rem 0 0;
   color: white;
 }
 
-.card-popover-header {
-  background-color: #46d2ff;
+.card-main {
+  min-width: 20rem;
+  max-width: 20rem;
+  margin-bottom: 1rem;
+}
+
+.card-main img {
+  margin-top: 10px;
+}
+
+.cards-main ul {
+  padding: 0;
+}
+
+.card-top-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
 }
 
-.card-popover-title {
-font-size: 1.2rem;
+.custom-ui {
+  text-align: center;
+  width: 450px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.23);
+  color: rgb(103, 103, 103);
 }
 
-.card-popover-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.custom-ui > h1 {
+  margin-top: 0;
 }
 
-.card-popover-dropdown {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-
-
-.card-popover-btn{
-
-  font-size: 1rem;
-  border: 1px solid #46d2ff;
-  color: #46d2ff;
-  background-color: transparent;
-  padding: .3rem 1rem;
-  font-family: 'Open Sans', sans-serif;
+.custom-ui > button {
+  width: 160px;
+  padding: 10px;
+  border: 1px solid rgb(103, 103, 103);
+  margin: 10px;
+  cursor: pointer;
+  background: none;
+  color: rgb(103, 103, 103);
+  font-size: 14px;
   border-radius: 5px;
 }
 
-.card-popover-btn:hover {
-  background-color: red;
-  border: 1px solid black;
-  color: black;
+.days-overdue {
+  color: rgb(233, 72, 59);
+  font-size: 1.1rem;
+  font-weight: 600;
 }

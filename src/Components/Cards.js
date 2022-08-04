@@ -1,75 +1,99 @@
 // Modules
 import { useState, useEffect } from "react";
-import { Form, InputGroup, Button } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 // Components
 import Api from "../api";
-import Loading from "./Loading";
+import Link from "./Link.tsx";
 import CreditCard from "./Card";
-// CSS & Style
+// Style
 import "./Styles/Cards.css";
-import { BsSearch } from "react-icons/bs";
+
 // Context
 import UserContext from "../UserContext";
 import { useContext } from "react";
 
-import PlaidApi from "../plaidApi";
-
-import Link from "./Link.tsx";
-
-const Cards = ({ sendPublicToken, updateFreq }) => {
+const Cards = ({ sendPublicToken }) => {
   const user = useContext(UserContext);
   const [cards, setCards] = useState([]);
+  let linkToken = ''
 
-  const [linkToken, setLinkToken] = useState("");
-
-  // const getLinkToken = async () => {
-  //   const token = await PlaidApi.getLinkToken()
-  //   setLinkToken(token)
-
-  // }
-
+  // Get all cards from the database
   const getCards = async () => {
     const cards = await Api.getUserCards(user);
     setCards(cards);
   };
 
+  // Get all cards when component loads
   useEffect(() => {
-    getCards()
-  }, [])
-  
-  // const handleAddCard = async () => {
-  //   const res = await PlaidApi.addCard(user)
-  //   console.log(res)
-  // }
+    getCards();
+  }, []);
 
+  // Send public token to the server and get all cards
   const handleSendPublicToken = async (token) => {
-   await sendPublicToken(token)
-   getCards()
-  }
+    await sendPublicToken(token);
+    getCards();
+  };
 
+  // Remove card
   const handleRemoveCard = async (id) => {
     try {
       const res = await Api.removeCard(user, id);
       if (res.id) {
-        getCards()
+        getCards();
       }
     } catch (err) {
       console.log(err);
     }
   };
 
- 
-
+  // Update usage frequency handler
+  const handleUpdateFreq = async (days, card_id) => {
+    try {
+      const res = await Api.updateFreq(user, days, card_id);
+      if (res.freq) {
+        getCards();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="cards-main">
-   <span className="cards-title">Credit Cards</span>
-      <ul>
-        {cards.length > 0
-          ? cards.map((card) => <CreditCard key={card.id} card={card} removeCard={handleRemoveCard}/>)
-          : "No cards added"}
-      </ul>
+      <span className="cards-title">Credit Cards</span>
       <Link sendPublicToken={handleSendPublicToken} linkToken={linkToken} />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          width: "42rem",
+        }}
+      >
+        <Row>
+          {cards.length > 0
+            ? cards.map((card) => {
+                return (
+                  <Col
+                    key={card.id}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "flex-start",
+                    }}
+                    md={6}
+                  >
+                    <CreditCard
+                      card={card}
+                      removeCard={handleRemoveCard}
+                      updateFreq={handleUpdateFreq}
+                    />
+                  </Col>
+                );
+              })
+            : "No cards added"}
+        </Row>
+      </div>
     </div>
   );
 };
